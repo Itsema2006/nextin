@@ -1,0 +1,266 @@
+/* ==========================================================================
+   Privacy Policy — layout tokens
+   Adjust these to match your existing design system's colors/fonts/spacing.
+   Everything is scoped under .pp-page so it can't leak into Navbar/Footer.
+   ========================================================================== */
+.pp-page {
+  --pp-bg: #ffffff;
+  --pp-text-primary: #0d0d0d;
+  --pp-text-body: #3d3d3d;
+  --pp-text-muted: #7a7a7a;
+  --pp-border: #e3e3e3;
+  --pp-border-strong: #d6d6d6;
+  --pp-font: 'Inter', 'Helvetica Neue', Arial, sans-serif; /* swap for your project's font */
+
+  /* Full-bleed: break out of any centered/flex parent from the global
+     layout so the dark theme background doesn't peek through on the
+     sides or below the content. Doesn't touch the parent itself. */
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  width: 100vw;
+  min-height: 100vh;
+
+  background: var(--pp-bg);
+  font-family: var(--pp-font);
+  color: var(--pp-text-body);
+}
+
+/* ---- Hero spacing above the title (matches the generous whitespace under
+   the nav on the reference page) ---- */
+.pp-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 180px 24px 140px;
+}
+
+@media (max-width: 1080px) {
+  .pp-container {
+    padding-top: 140px;
+  }
+}
+
+@media (max-width: 640px) {
+  .pp-container {
+    padding: 110px 20px 80px;
+  }
+}
+
+/* ---- Top utility row: country / language selectors, right-aligned ---- */
+.pp-utility-row {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-bottom: 56px;
+}
+
+.pp-select-wrap {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.pp-select {
+  appearance: none;
+  -webkit-appearance: none;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--pp-text-body);
+  background: transparent;
+  border: 1px solid var(--pp-border-strong);
+  border-radius: 6px;
+  padding: 8px 30px 8px 12px;
+  cursor: pointer;
+}
+
+.pp-select:focus-visible {
+  outline: 2px solid var(--pp-text-primary);
+  outline-offset: 2px;
+}
+
+.pp-select-caret {
+  position: absolute;
+  right: 10px;
+  font-size: 10px;
+  color: var(--pp-text-muted);
+  pointer-events: none;
+}
+
+@media (max-width: 640px) {
+  .pp-utility-row {
+    justify-content: flex-start;
+    flex-wrap: wrap;
+  }
+}
+
+/* ---- Title ---- */
+.pp-title {
+  font-size: 52px;
+  line-height: 1.1;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--pp-text-primary);
+  text-align: center;
+  margin: 0 0 40px;
+}
+
+@media (max-width: 640px) {
+  .pp-title {
+    font-size: 32px;
+    margin-bottom: 28px;
+  }
+}
+
+/* ---- Lead block: effective date + intro paragraph ---- */
+.pp-lead {
+  margin: 0 auto 48px;
+  max-width: 760px;
+  text-align: center;
+}
+
+.pp-lead p {
+  font-size: 16px;
+  line-height: 1.7;
+  margin: 0 0 16px;
+}
+
+.pp-lead p:last-child {
+  margin-bottom: 0;
+}
+
+.pp-effective-date {
+  color: var(--pp-text-primary);
+}
+
+/* ---- Accordion card: single bordered container, no shadow, no radius,
+   rows separated by internal dividers — matches the reference. ---- */
+.pp-accordion-card {
+  border: 1px solid var(--pp-border-strong);
+  background: var(--pp-bg);
+}
+
+.pp-accordion-item {
+  border-top: 1px solid var(--pp-border);
+}
+
+.pp-accordion-item:first-child {
+  border-top: none;
+}
+
+.pp-accordion-trigger {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  padding: 26px 28px;
+  font-family: inherit;
+}
+
+.pp-accordion-title {
+  font-size: 19px;
+  font-weight: 600;
+  color: var(--pp-text-primary);
+  line-height: 1.4;
+}
+
+.pp-accordion-number {
+  color: var(--pp-text-muted);
+  font-weight: 500;
+}
+
+.pp-accordion-icon {
+  flex: 0 0 auto;
+  font-size: 20px;
+  line-height: 1;
+  color: var(--pp-text-primary);
+  width: 24px;
+  text-align: center;
+  transition: transform 200ms ease;
+}
+
+/* ---- Smooth open/close animation without JS height-measuring.
+   The wrapper animates its grid row from 0fr -> 1fr; inner div clips
+   overflow so content never spills out mid-transition. ---- */
+.pp-accordion-collapse {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 320ms ease;
+}
+
+.pp-accordion-item.is-open .pp-accordion-collapse {
+  grid-template-rows: 1fr;
+}
+
+.pp-accordion-body-inner {
+  overflow: hidden;
+}
+
+.pp-accordion-body {
+  padding: 0 28px 32px;
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--pp-text-body);
+}
+
+.pp-accordion-body p {
+  margin: 0 0 16px;
+}
+
+.pp-accordion-body p:last-child {
+  margin-bottom: 0;
+}
+
+.pp-accordion-body ul {
+  margin: 0;
+  padding-left: 22px;
+}
+
+.pp-accordion-body li {
+  margin-bottom: 12px;
+  padding-left: 4px;
+}
+
+.pp-accordion-body li:last-child {
+  margin-bottom: 0;
+}
+
+.pp-accordion-body a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.pp-accordion-body a:hover {
+  color: #000;
+}
+
+@media (max-width: 640px) {
+  .pp-accordion-trigger {
+    padding: 20px 20px;
+  }
+
+  .pp-accordion-title {
+    font-size: 16px;
+  }
+
+  .pp-accordion-body {
+    padding: 0 20px 24px;
+    font-size: 15px;
+  }
+}
+
+/* ---- Respect reduced-motion preference ---- */
+@media (prefers-reduced-motion: reduce) {
+  .pp-accordion-collapse,
+  .pp-accordion-icon {
+    transition: none;
+  }
+}
