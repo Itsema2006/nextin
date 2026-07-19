@@ -363,9 +363,9 @@ export default function Contact() {
 
   const coverY = useTransform(springProgress, [0, 1], ['100%', '0%'], { clamp: false });
   const { scrollY } = useScroll();
-  const heroOpacity = useTransform(scrollY, [0, 450], [1, 0]);
-  const heroScale = useTransform(scrollY, [0, 450], [1, 0.96]);
-  const heroY = useTransform(scrollY, [0, 600], [0, 240]);
+  const heroOpacity = useTransform(scrollY, [0, 500, 850], [1, 1, 0]);
+  const heroScale = useTransform(scrollY, [0, 500, 850], [1, 1, 0.96]);
+  const heroY = useTransform(scrollY, [0, 850], [0, 200]);
 
   // Expertise Tab Selector Data
   const expertiseData = {
