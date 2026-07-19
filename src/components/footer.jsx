@@ -7,7 +7,7 @@ const PAGE_LINKS = [
   { label: 'About us', href: '#about' },
   { label: 'Career', href: '#' },
   { label: 'Pricing', href: '#' },
-  { label: 'Blog', href: '#' },
+  { label: 'Blog', to: '/blog' },
   { label: 'FAQ', href: '#' }
 ];
 
@@ -36,7 +36,11 @@ export default function Footer() {
             <ul className="footer-vertical-links">
               {PAGE_LINKS.map((link, idx) => (
                 <li key={idx}>
-                  <a href={link.href}>{link.label}</a>
+                  {link.to ? (
+                    <Link to={link.to}>{link.label}</Link>
+                  ) : (
+                    <a href={link.href}>{link.label}</a>
+                  )}
                 </li>
               ))}
             </ul>
