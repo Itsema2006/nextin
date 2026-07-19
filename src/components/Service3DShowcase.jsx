@@ -277,7 +277,7 @@ export default function Service3DShowcase({ activeTab }) {
         ctx.beginPath();
         ctx.moveTo(p1.x, p1.y);
         ctx.lineTo(p2.x, p2.y);
-        ctx.strokeStyle = `rgba(255, 255, 255, ${alpha * depthAlpha * 0.28})`;
+        ctx.strokeStyle = `rgba(255, 85, 0, ${alpha * depthAlpha * 0.45})`;
         ctx.lineWidth = mouse.isHovered ? 1.5 : 1.0;
         ctx.stroke();
       };
@@ -299,10 +299,10 @@ export default function Service3DShowcase({ activeTab }) {
 
         ctx.beginPath();
         ctx.arc(p.x, p.y, radius, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(255, 255, 255, ${depthAlpha * 0.85})`;
+        ctx.fillStyle = `rgba(255, 85, 0, ${depthAlpha * 0.95})`;
         
         if (mouse.isHovered) {
-          ctx.shadowColor = '#ffffff';
+          ctx.shadowColor = '#FF5500';
           ctx.shadowBlur = 10;
         } else {
           ctx.shadowBlur = 0;

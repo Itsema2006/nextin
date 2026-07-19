@@ -1,5 +1,52 @@
 import { useState } from 'react';
+import { motion, AnimatePresence, useMotionValue, useSpring } from 'framer-motion';
 import Service3DShowcase from './Service3DShowcase';
+
+// Reusable Tilt Card helper for services tabs
+function TiltCard({ children, className }) {
+  const rotateX = useMotionValue(0);
+  const rotateY = useMotionValue(0);
+
+  const springConfig = { stiffness: 150, damping: 20 };
+  const rxSpring = useSpring(rotateX, springConfig);
+  const rySpring = useSpring(rotateY, springConfig);
+
+  const handleMouseMove = (e) => {
+    const el = e.currentTarget;
+    const rect = el.getBoundingClientRect();
+    const width = rect.width;
+    const height = rect.height;
+    const mouseX = e.clientX - rect.left - width / 2;
+    const mouseY = e.clientY - rect.top - height / 2;
+    
+    const rX = -(mouseY / (height / 2)) * 8;
+    const rY = (mouseX / (width / 2)) * 8;
+
+    rotateX.set(rX);
+    rotateY.set(rY);
+  };
+
+  const handleMouseLeave = () => {
+    rotateX.set(0);
+    rotateY.set(0);
+  };
+
+  return (
+    <motion.div
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      style={{
+        rotateX: rxSpring,
+        rotateY: rySpring,
+        transformStyle: 'preserve-3d',
+        perspective: '1000px',
+      }}
+      className={className}
+    >
+      {children}
+    </motion.div>
+  );
+}
 
 const SERVICES_DATA = [
   {
@@ -128,24 +175,25 @@ export default function Services() {
           {SERVICES_DATA.map((service) => {
             const isActive = service.id === activeTab;
             return (
-              <button
-                key={service.id}
-                onClick={() => setActiveTab(service.id)}
-                className={`service-tab-btn ${isActive ? 'active' : ''}`}
-                aria-selected={isActive}
-                role="tab"
-              >
-                <div className="tab-icon-wrapper">{service.icon}</div>
-                <div className="tab-btn-text">
-                  <span className="tab-btn-title">{service.title}</span>
-                  <span className="tab-btn-subtitle">{service.subtitle}</span>
-                </div>
-                <div className="tab-arrow">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <path d="M5 12h14M12 5l7 7-7 7" />
-                  </svg>
-                </div>
-              </button>
+              <TiltCard key={service.id} className="service-tab-card">
+                <button
+                  onClick={() => setActiveTab(service.id)}
+                  className={`service-tab-btn ${isActive ? 'active' : ''}`}
+                  aria-selected={isActive}
+                  role="tab"
+                >
+                  <div className="tab-icon-wrapper">{service.icon}</div>
+                  <div className="tab-btn-text">
+                    <span className="tab-btn-title">{service.title}</span>
+                    <span className="tab-btn-subtitle">{service.subtitle}</span>
+                  </div>
+                  <div className="tab-arrow">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M5 12h14M12 5l7 7-7 7" />
+                    </svg>
+                  </div>
+                </button>
+              </TiltCard>
             );
           })}
         </div>
@@ -154,49 +202,58 @@ export default function Services() {
         <div className="services-detail-pane">
           <div className="detail-glow-blob"></div>
           
-          <div className="detail-content-wrapper">
-            <div className="detail-header">
-              <span className="detail-tag">{activeService.title}</span>
-              <h3 className="detail-title">{activeService.subtitle}</h3>
-              <p className="detail-desc">{activeService.description}</p>
-            </div>
-
-            <div className="detail-grid">
-              <div className="detail-deliverables">
-                <h4>WHAT WE DELIVER</h4>
-                <ul>
-                  {activeService.deliverables.map((item, index) => (
-                    <li key={index}>
-                      <svg className="bullet-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                        <polyline points="20 6 9 17 4 12" />
-                      </svg>
-                      {item}
-                    </li>
-                  ))}
-                </ul>
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={activeTab}
+              initial={{ opacity: 0, y: 15, filter: 'blur(4px)' }}
+              animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+              exit={{ opacity: 0, y: -15, filter: 'blur(4px)' }}
+              transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+              className="detail-content-wrapper"
+            >
+              <div className="detail-header">
+                <span className="detail-tag">{activeService.title}</span>
+                <h3 className="detail-title">{activeService.subtitle}</h3>
+                <p className="detail-desc">{activeService.description}</p>
               </div>
 
-              <div className="detail-sidebar">
-                <Service3DShowcase activeTab={activeTab} />
-                
-                <div className="detail-stat-card">
-                  <span className="stat-value">{activeService.metrics.value}</span>
-                  <span className="stat-label">{activeService.metrics.label}</span>
+              <div className="detail-grid">
+                <div className="detail-deliverables">
+                  <h4>WHAT WE DELIVER</h4>
+                  <ul>
+                    {activeService.deliverables.map((item, index) => (
+                      <li key={index}>
+                        <svg className="bullet-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                          <polyline points="20 6 9 17 4 12" />
+                        </svg>
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
                 </div>
 
-                <div className="detail-tech-stack">
-                  <h4>TECHNOLOGIES & TOOLS</h4>
-                  <div className="tech-chips">
-                    {activeService.technologies.map((tech, index) => (
-                      <span key={index} className="tech-chip">
-                        {tech}
-                      </span>
-                    ))}
+                <div className="detail-sidebar">
+                  <Service3DShowcase activeTab={activeTab} />
+                  
+                  <div className="detail-stat-card">
+                    <span className="stat-value">{activeService.metrics.value}</span>
+                    <span className="stat-label">{activeService.metrics.label}</span>
+                  </div>
+
+                  <div className="detail-tech-stack">
+                    <h4>TECHNOLOGIES & TOOLS</h4>
+                    <div className="tech-chips">
+                      {activeService.technologies.map((tech, index) => (
+                        <span key={index} className="tech-chip">
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
+            </motion.div>
+          </AnimatePresence>
         </div>
       </div>
     </section>
