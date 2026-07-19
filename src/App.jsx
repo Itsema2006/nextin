@@ -6,6 +6,8 @@ import PrivacyPolicy from './components/Privacypolicy';
 import CookiePolicy from './components/CookiesModal';
 import TermsOfUse from './components/TermsOfUse';
 import Contact from './components/Contact';
+import Blog from './components/Blog';
+import BlogPost from './components/BlogPost';
 import './App.css';
 
 function HomePage() {
@@ -112,6 +114,8 @@ export default function App() {
         <Route path="/cookie-policy" element={<CookiePolicy />} />
         <Route path="/terms-of-use" element={<TermsOfUse />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/blog" element={<Blog />} />
+        <Route path="/blog/:slug" element={<BlogPost />} />
       </Routes>
 
       {/* Site Footer */}
