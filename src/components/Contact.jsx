@@ -1,7 +1,10 @@
 import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence, useMotionValue, useSpring, useTransform, useScroll } from 'framer-motion';
 import './Contact.css';
-import expertiseVideo from '../assets/tinyvid_optimized_1_c3e89d72e9ca2837d9e85643956c8544.mp4';
+import saasVideo from '../assets/tinyvid_optimized_1_c3e89d72e9ca2837d9e85643956c8544.mp4';
+import healthcareVideo from '../assets/tinyvid_optimized_2_original-7d5a927fb8e1aed94b2f0dadb537fe63.mp4';
+import edtechVideo from '../assets/tinyvid_optimized_5_original-c138f335ff5d89bfd76a54cb9b1b76f4.mp4';
+import fintechVideo from '../assets/tinyvid_optimized_3_original-73b35d49f86d187eea5f51868f628bd4.mp4';
 
 
 // Reusable Tilt Card Sub-component for 3D Hover Tilt Effects
@@ -71,7 +74,7 @@ function TypingHeading({ text, className }) {
           observer.unobserve(entry.target);
         }
       },
-      { threshold: 0.1 }
+      { threshold: 0.35 }
     );
 
     if (elementRef.current) {
@@ -84,18 +87,23 @@ function TypingHeading({ text, className }) {
   useEffect(() => {
     if (!isInView) return;
 
-    let index = 0;
-    const interval = setInterval(() => {
-      if (index < text.length) {
-        setDisplayedText((prev) => prev + text.charAt(index));
+    // Small delay to ensure the section slide reveal is visible before typing starts
+    const delayTimeout = setTimeout(() => {
+      let index = 0;
+      const interval = setInterval(() => {
         index++;
-      } else {
-        setIsComplete(true);
-        clearInterval(interval);
-      }
-    }, 30);
+        if (index <= text.length) {
+          setDisplayedText(text.slice(0, index));
+        } else {
+          setIsComplete(true);
+          clearInterval(interval);
+        }
+      }, 25);
 
-    return () => clearInterval(interval);
+      return () => clearInterval(interval);
+    }, 350);
+
+    return () => clearTimeout(delayTimeout);
   }, [isInView, text]);
 
   return (
@@ -120,6 +128,49 @@ function TypingHeading({ text, className }) {
     </h2>
   );
 }
+
+const worldMapDots = [
+  // North America
+  { cx: 120, cy: 100 }, { cx: 140, cy: 100 }, { cx: 160, cy: 100 }, { cx: 180, cy: 100 }, { cx: 200, cy: 100 },
+  { cx: 110, cy: 120 }, { cx: 130, cy: 120 }, { cx: 150, cy: 120 }, { cx: 170, cy: 120 }, { cx: 190, cy: 120 }, { cx: 210, cy: 120 },
+  { cx: 100, cy: 140 }, { cx: 120, cy: 140 }, { cx: 140, cy: 140 }, { cx: 160, cy: 140 }, { cx: 180, cy: 140 }, { cx: 200, cy: 140 }, { cx: 220, cy: 140 },
+  { cx: 130, cy: 160 }, { cx: 150, cy: 160 }, { cx: 170, cy: 160 }, { cx: 190, cy: 160 }, { cx: 210, cy: 160 },
+  { cx: 160, cy: 180 }, { cx: 180, cy: 180 }, { cx: 200, cy: 180 },
+  { cx: 200, cy: 200 },
+  // South America
+  { cx: 210, cy: 220 }, { cx: 230, cy: 220 }, { cx: 250, cy: 220 },
+  { cx: 220, cy: 240 }, { cx: 240, cy: 240 }, { cx: 260, cy: 240 },
+  { cx: 230, cy: 260 }, { cx: 250, cy: 260 }, { cx: 270, cy: 260 },
+  { cx: 240, cy: 280 }, { cx: 260, cy: 280 },
+  { cx: 250, cy: 300 }, { cx: 270, cy: 300 },
+  { cx: 260, cy: 320 },
+  { cx: 265, cy: 340 },
+  // Europe
+  { cx: 400, cy: 80 }, { cx: 420, cy: 80 }, { cx: 440, cy: 80 }, { cx: 460, cy: 80 },
+  { cx: 390, cy: 100 }, { cx: 410, cy: 100 }, { cx: 430, cy: 100 }, { cx: 450, cy: 100 }, { cx: 470, cy: 100 },
+  { cx: 380, cy: 120 }, { cx: 400, cy: 120 }, { cx: 420, cy: 120 }, { cx: 440, cy: 120 }, { cx: 460, cy: 120 }, { cx: 480, cy: 120 },
+  { cx: 410, cy: 140 }, { cx: 430, cy: 140 }, { cx: 450, cy: 140 }, { cx: 470, cy: 140 },
+  // Africa
+  { cx: 390, cy: 180 }, { cx: 410, cy: 180 }, { cx: 430, cy: 180 }, { cx: 450, cy: 180 },
+  { cx: 400, cy: 200 }, { cx: 420, cy: 200 }, { cx: 440, cy: 200 }, { cx: 460, cy: 200 },
+  { cx: 420, cy: 220 }, { cx: 440, cy: 220 },
+  { cx: 430, cy: 240 }, { cx: 450, cy: 240 },
+  { cx: 440, cy: 260 },
+  { cx: 445, cy: 280 },
+  // Asia
+  { cx: 500, cy: 80 }, { cx: 520, cy: 80 }, { cx: 540, cy: 80 }, { cx: 560, cy: 80 }, { cx: 580, cy: 80 }, { cx: 600, cy: 80 }, { cx: 620, cy: 80 }, { cx: 640, cy: 80 },
+  { cx: 490, cy: 100 }, { cx: 510, cy: 100 }, { cx: 530, cy: 100 }, { cx: 550, cy: 100 }, { cx: 570, cy: 100 }, { cx: 590, cy: 100 }, { cx: 610, cy: 100 }, { cx: 630, cy: 100 }, { cx: 650, cy: 100 }, { cx: 670, cy: 100 },
+  { cx: 480, cy: 120 }, { cx: 500, cy: 120 }, { cx: 520, cy: 120 }, { cx: 540, cy: 120 }, { cx: 560, cy: 120 }, { cx: 580, cy: 120 }, { cx: 600, cy: 120 }, { cx: 610, cy: 120 }, { cx: 630, cy: 120 }, { cx: 650, cy: 120 }, { cx: 670, cy: 120 }, { cx: 690, cy: 120 },
+  { cx: 490, cy: 140 }, { cx: 510, cy: 140 }, { cx: 530, cy: 140 }, { cx: 550, cy: 140 }, { cx: 570, cy: 140 }, { cx: 590, cy: 140 }, { cx: 610, cy: 140 }, { cx: 630, cy: 140 }, { cx: 650, cy: 140 }, { cx: 670, cy: 140 },
+  { cx: 500, cy: 160 }, { cx: 520, cy: 160 }, { cx: 540, cy: 160 }, { cx: 560, cy: 160 }, { cx: 580, cy: 160 }, { cx: 600, cy: 160 }, { cx: 620, cy: 160 }, { cx: 640, cy: 160 },
+  { cx: 530, cy: 180 }, { cx: 550, cy: 180 }, { cx: 570, cy: 180 }, { cx: 590, cy: 180 }, { cx: 610, cy: 180 }, { cx: 630, cy: 180 },
+  { cx: 560, cy: 200 }, { cx: 580, cy: 200 }, { cx: 600, cy: 200 }, { cx: 620, cy: 200 },
+  { cx: 590, cy: 220 }, { cx: 610, cy: 220 },
+  // Australia
+  { cx: 660, cy: 260 }, { cx: 680, cy: 260 }, { cx: 700, cy: 260 },
+  { cx: 650, cy: 280 }, { cx: 670, cy: 280 }, { cx: 690, cy: 280 }, { cx: 710, cy: 280 },
+  { cx: 660, cy: 300 }, { cx: 680, cy: 300 }, { cx: 700, cy: 300 }
+];
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -319,6 +370,7 @@ export default function Contact() {
   // Expertise Tab Selector Data
   const expertiseData = {
     saas: {
+      video: saasVideo,
       subheading: 'Scalable platforms for growth-focused teams',
       challenges: [
         'High churn from poor and fragmented UX',
@@ -332,6 +384,7 @@ export default function Contact() {
       ]
     },
     healthcare: {
+      video: healthcareVideo,
       subheading: 'HIPAA-compliant, patient-first health platforms',
       challenges: [
         'Rigid compliance and security requirements',
@@ -345,6 +398,7 @@ export default function Contact() {
       ]
     },
     edtech: {
+      video: edtechVideo,
       subheading: 'Engaging learning hubs for global education',
       challenges: [
         'Drop-off in self-paced learning courses',
@@ -358,6 +412,7 @@ export default function Contact() {
       ]
     },
     fintech: {
+      video: fintechVideo,
       subheading: 'High-frequency trading and secure banking interfaces',
       challenges: [
         'High latency in charting and transactional updates',
@@ -804,8 +859,8 @@ export default function Contact() {
         {/* Rounded cover panel — slides up over the hero as you scroll */}
         <motion.div className="hero-reveal-cover" style={{ y: coverY }} aria-hidden="true">
           <div className="curved-divider" style={{ backgroundColor: 'transparent' }}>
-            <svg viewBox="0 0 1440 70" preserveAspectRatio="none">
-              <path d="M0,70 L0,0 C0,25 40,60 100,60 L500,60 C580,60 620,10 670,10 C690,10 705,25 705,50 L705,70 L735,70 L735,50 C735,25 740,10 770,10 C820,10 860,60 940,60 L1340,60 C1400,60 1440,25 1440,0 L1440,70 Z" />
+            <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
+              <path fill="#ffffff" d="M0,120 L0,0 C0,40 40,100 100,100 L500,100 C580,100 620,20 670,20 C690,20 705,40 705,80 L705,120 L735,120 L735,80 C735,40 740,20 770,20 C820,20 860,100 940,100 L1340,100 C1400,100 1440,40 1440,0 L1440,120 Z" />
             </svg>
           </div>
           <div className="cover-body" />
@@ -878,40 +933,16 @@ export default function Contact() {
               <motion.div variants={itemStagger} className="map-canvas-container">
                 <svg className="world-map-svg" viewBox="0 0 800 450" fill="none" xmlns="http://www.w3.org/2000/svg">
                   {/* Dotted grid continents */}
-                  <circle className="map-dot" cx="120" cy="130" r="2.5" />
-                  <circle className="map-dot" cx="140" cy="120" r="2.5" />
-                  <circle className="map-dot" cx="160" cy="140" r="2.5" />
-                  <circle className="map-dot" cx="180" cy="150" r="2.5" />
-                  <circle className="map-dot" cx="130" cy="160" r="2.5" />
-                  <circle className="map-dot" cx="150" cy="170" r="2.5" />
-                  <circle className="map-dot" cx="170" cy="160" r="2.5" />
-                  <circle className="map-dot" cx="190" cy="180" r="2.5" />
-                  <circle className="map-dot" cx="200" cy="150" r="2.5" />
-                  <circle className="map-dot" cx="210" cy="170" r="2.5" />
-                  <circle className="map-dot" cx="220" cy="190" r="2.5" />
-                  <circle className="map-dot" cx="230" cy="160" r="2.5" />
-                  
-                  <circle className="map-dot" cx="420" cy="120" r="2.5" />
-                  <circle className="map-dot" cx="440" cy="110" r="2.5" />
-                  <circle className="map-dot" cx="450" cy="130" r="2.5" />
-                  <circle className="map-dot" cx="470" cy="120" r="2.5" />
-                  <circle className="map-dot" cx="430" cy="140" r="2.5" />
-                  <circle className="map-dot" cx="460" cy="150" r="2.5" />
-                  <circle className="map-dot" cx="480" cy="140" r="2.5" />
-                  <circle className="map-dot" cx="450" cy="160" r="2.5" />
-                  <circle className="map-dot" cx="470" cy="170" r="2.5" />
-                  <circle className="map-dot" cx="490" cy="160" r="2.5" />
-                  
-                  <circle className="map-dot" cx="250" cy="280" r="2" opacity="0.3" />
-                  <circle className="map-dot" cx="270" cy="300" r="2" opacity="0.3" />
-                  <circle className="map-dot" cx="290" cy="330" r="2" opacity="0.3" />
-                  <circle className="map-dot" cx="480" cy="270" r="2" opacity="0.3" />
-                  <circle className="map-dot" cx="500" cy="290" r="2" opacity="0.3" />
-                  <circle className="map-dot" cx="620" cy="140" r="2" opacity="0.3" />
-                  <circle className="map-dot" cx="650" cy="160" r="2" opacity="0.3" />
-                  <circle className="map-dot" cx="680" cy="180" r="2" opacity="0.3" />
-                  <circle className="map-dot" cx="710" cy="150" r="2" opacity="0.3" />
-                  <circle className="map-dot" cx="740" cy="200" r="2" opacity="0.3" />
+                  {worldMapDots.map((dot, idx) => (
+                    <circle 
+                      key={idx} 
+                      className="map-dot" 
+                      cx={dot.cx} 
+                      cy={dot.cy} 
+                      r="2.5" 
+                      opacity={dot.cy > 250 ? 0.35 : 1}
+                    />
+                  ))}
 
                   {/* USA Hub Pin */}
                   <circle className="map-pin-glow" cx="210" cy="160" r="15" />
@@ -965,7 +996,7 @@ export default function Contact() {
                 <video 
                   key={activeTab} // Resets/reloads video loop if needed, keeps it highly interactive!
                   className="expertise-video" 
-                  src={expertiseVideo} 
+                  src={expertiseData[activeTab].video} 
                   autoPlay 
                   loop 
                   muted 
