@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const CATEGORIES_DATA = {
   'DESIGN': {
@@ -52,10 +53,10 @@ export default function HeaderMegaMenu() {
       <header className="site-header-white">
         <div className="header-container-white">
           {/* Logo */}
-          <a href="#" className="logo-white" onClick={() => setIsServicesOpen(false)}>
+          <Link to="/" className="logo-white" onClick={() => setIsServicesOpen(false)}>
             <span className="logo-star-icon">✦</span>
             <span className="logo-text-white">nextin</span>
-          </a>
+          </Link>
 
           {/* Mobile toggle */}
           <button 
@@ -85,18 +86,18 @@ export default function HeaderMegaMenu() {
                   INDUSTRIES ▼
                 </a>
               </li>
-              <li><a href="#tech" onClick={() => setMobileNavActive(false)}>CASES</a></li>
+              <li><a href="/#tech" onClick={() => setMobileNavActive(false)}>CASES</a></li>
               <li>
                 <a href="#" className="nav-link-with-arrow">
                   COMPANY ▼
                 </a>
               </li>
-              <li><a href="#about" onClick={() => setMobileNavActive(false)}>INSIGHTS</a></li>
-              <li><a href="#cta" onClick={() => setMobileNavActive(false)}>CONTACTS</a></li>
+              <li><a href="/#about" onClick={() => setMobileNavActive(false)}>INSIGHTS</a></li>
+              <li><Link to="/contact" onClick={() => setMobileNavActive(false)}>CONTACTS</Link></li>
             </ul>
-            <a href="#cta" className="header-cta-btn-white" onClick={() => setMobileNavActive(false)}>
+            <Link to="/contact" className="header-cta-btn-white" onClick={() => setMobileNavActive(false)}>
               GET IN TOUCH
-            </a>
+            </Link>
           </nav>
         </div>
 
@@ -142,7 +143,7 @@ export default function HeaderMegaMenu() {
               <div className="middle-list-wrapper">
                 {activeCategoryData.items.map((subService, idx) => (
                   <a 
-                    href="#services-section" 
+                    href="/#services-section" 
                     key={idx} 
                     className="middle-list-item"
                     onClick={() => setIsServicesOpen(false)}
