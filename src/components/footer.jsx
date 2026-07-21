@@ -257,11 +257,20 @@ export default function Footer() {
 
           <div className={`accordion-panel-content ${isServicesExpanded ? 'open' : ''}`}>
             <div className="services-accordion-grid">
-              {ALL_SERVICES_21.map((service, index) => (
-                <a href="#services-section" key={index} className="accordion-service-link">
-                  {service}
-                </a>
-              ))}
+              {ALL_SERVICES_21.map((service, index) => {
+                if (service === 'Website design') {
+                  return (
+                    <Link to="/services/website" key={index} className="accordion-service-link">
+                      {service}
+                    </Link>
+                  );
+                }
+                return (
+                  <a href="#services-section" key={index} className="accordion-service-link">
+                    {service}
+                  </a>
+                );
+              })}
             </div>
           </div>
         </div>

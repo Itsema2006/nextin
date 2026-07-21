@@ -8,7 +8,9 @@ import TermsOfUse from './components/TermsOfUse';
 import Contact from './components/Contact';
 import Blog from './components/Blog';
 import BlogPost from './components/BlogPost';
+import WebsiteService from './components/services/website';
 import './App.css';
+
 
 function HomePage() {
   return (
@@ -116,6 +118,7 @@ export default function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/blog" element={<Blog />} />
         <Route path="/blog/:slug" element={<BlogPost />} />
+        <Route path="/services/website" element={<WebsiteService />} />
       </Routes>
 
       {/* Site Footer */}

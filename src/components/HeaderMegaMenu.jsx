@@ -141,16 +141,30 @@ export default function HeaderMegaMenu() {
             {/* Middle Services List Column */}
             <div className="dropdown-middle">
               <div className="middle-list-wrapper">
-                {activeCategoryData.items.map((subService, idx) => (
-                  <a 
-                    href="/#services-section" 
-                    key={idx} 
-                    className="middle-list-item"
-                    onClick={() => setIsServicesOpen(false)}
-                  >
-                    {subService}
-                  </a>
-                ))}
+                {activeCategoryData.items.map((subService, idx) => {
+                  if (subService === 'Website design') {
+                    return (
+                      <Link 
+                        to="/services/website" 
+                        key={idx} 
+                        className="middle-list-item"
+                        onClick={() => setIsServicesOpen(false)}
+                      >
+                        {subService}
+                      </Link>
+                    );
+                  }
+                  return (
+                    <a 
+                      href="/#services-section" 
+                      key={idx} 
+                      className="middle-list-item"
+                      onClick={() => setIsServicesOpen(false)}
+                    >
+                      {subService}
+                    </a>
+                  );
+                })}
               </div>
             </div>
 
