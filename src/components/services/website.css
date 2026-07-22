@@ -769,3 +769,282 @@
     padding-left: 0;
   }
 }
+
+/* ==========================================
+   Custom 3D Geometric Wireframe
+   ========================================== */
+.w-wireframe-container {
+  width: 100%;
+  aspect-ratio: 1/1;
+  border-radius: 24px;
+  overflow: hidden;
+  background-color: rgba(17, 17, 17, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  box-sizing: border-box;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
+  color: rgba(255, 255, 255, 0.65);
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.4s, color 0.4s;
+}
+
+.w-wireframe-container:hover {
+  transform: translateY(-8px) scale(1.02);
+  border-color: var(--w-primary);
+  color: var(--w-primary);
+}
+
+.w-hero-wireframe-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* ==========================================
+   Details Column Grid (Redesigned Process)
+   ========================================== */
+.w-details-grid {
+  display: grid;
+  grid-template-columns: 0.95fr 1.05fr;
+  gap: 100px;
+  align-items: start;
+  padding: 100px 0 60px;
+}
+
+.w-details-left {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.w-details-title {
+  font-size: clamp(32px, 4.5vw, 56px);
+  font-weight: 300;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  color: var(--w-text-dark);
+  margin-bottom: 32px;
+  text-align: left;
+}
+
+.w-title-bold {
+  font-weight: 700;
+}
+
+.w-title-light {
+  font-weight: 200;
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+.w-details-desc {
+  font-size: 15px;
+  line-height: 1.75;
+  color: var(--w-text-body-light);
+  margin-bottom: 40px;
+  text-align: left;
+  max-width: 480px;
+}
+
+/* View Works Button */
+.w-view-works-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+  text-decoration: none;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  color: var(--w-text-dark);
+  transition: opacity 0.3s;
+}
+
+.w-circle-arrow-right {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background-color: var(--w-border-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), background-color 0.3s;
+}
+
+.w-circle-arrow-right svg {
+  width: 16px;
+  height: 16px;
+  color: var(--w-text-dark);
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.w-view-works-btn:hover .w-circle-arrow-right {
+  background-color: rgba(0, 0, 0, 0.08);
+}
+
+.w-view-works-btn:hover .w-circle-arrow-right svg {
+  transform: translateX(3px);
+}
+
+/* Accordion List */
+.w-accordion-list {
+  border-top: 1px solid var(--w-border-light);
+  width: 100%;
+}
+
+.w-accordion-item {
+  border-bottom: 1px solid var(--w-border-light);
+  transition: border-color 0.3s;
+}
+
+.w-accordion-trigger {
+  width: 100%;
+  background: none;
+  border: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 28px 0;
+  cursor: pointer;
+  text-align: left;
+  outline: none;
+}
+
+.w-accordion-title {
+  font-size: clamp(14px, 1.8vw, 18px);
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: var(--w-text-dark);
+  transition: color 0.3s;
+}
+
+.w-accordion-icon-circle {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: var(--w-border-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  transition: background-color 0.3s;
+}
+
+.w-accordion-icon-plus {
+  width: 12px;
+  height: 12px;
+  position: relative;
+  display: block;
+}
+
+.w-accordion-icon-plus::before,
+.w-accordion-icon-plus::after {
+  content: '';
+  position: absolute;
+  background-color: var(--w-text-dark);
+  transition: transform 0.35s ease;
+}
+
+/* Horizontal line */
+.w-accordion-icon-plus::before {
+  top: 5px;
+  left: 0;
+  width: 12px;
+  height: 2px;
+}
+
+/* Vertical line */
+.w-accordion-icon-plus::after {
+  top: 0;
+  left: 5px;
+  width: 2px;
+  height: 12px;
+}
+
+.w-accordion-item.is-open .w-accordion-icon-plus::before {
+  transform: rotate(90deg);
+}
+
+.w-accordion-item.is-open .w-accordion-icon-plus::after {
+  transform: rotate(90deg);
+}
+
+.w-accordion-body {
+  padding-bottom: 28px;
+}
+
+.w-accordion-body p {
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--w-text-body-light);
+  margin: 0;
+}
+
+.w-accordion-trigger:hover .w-accordion-icon-circle {
+  background-color: rgba(0, 0, 0, 0.08);
+}
+
+/* ==========================================
+   Overcollapsing Scroll-Reveal Transition
+   ========================================== */
+.w-hero-pin-container {
+  position: relative;
+  height: 200vh;
+}
+
+.w-hero-reveal-cover {
+  position: sticky;
+  top: 0;
+  height: 130vh;
+  background-color: transparent;
+  z-index: 5;
+  pointer-events: none;
+}
+
+.w-cover-body {
+  background-color: var(--w-bg-light);
+  height: calc(100% - 120px);
+  width: 100%;
+}
+
+.w-light-sections-wrapper {
+  position: relative;
+  z-index: 10;
+  background-color: var(--w-bg-light);
+  margin-top: -1px; /* avoid any sub-pixel seam with the cover */
+}
+
+@media (max-width: 1024px) {
+  .w-details-grid {
+    gap: 60px;
+  }
+}
+
+@media (max-width: 860px) {
+  .w-details-grid {
+    grid-template-columns: 1fr;
+    gap: 60px;
+  }
+}
+
+@media (max-width: 768px) {
+  .w-hero-pin-container {
+    height: auto;
+  }
+
+  .w-dark-wrap,
+  .w-hero-reveal-cover {
+    position: relative;
+    height: auto;
+  }
+
+  .w-hero-reveal-cover {
+    display: none;
+  }
+
+  .w-light-sections-wrapper {
+    border-radius: 32px 32px 0 0;
+  }
+}

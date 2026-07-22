@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 const CATEGORIES_DATA = {
   'DESIGN': {
-    items: ['Web design', 'Mobile design', 'Website design', 'Website redesign', 'Branding & identity', 'Design prototype'],
+    items: [ 'Mobile design', 'Website design', 'Branding & identity', 'Design prototype'],
     image: '/design_showcase.png'
   },
   'DEVELOPMENT': {
@@ -15,7 +15,7 @@ const CATEGORIES_DATA = {
     image: '/strategy_showcase.png'
   },
   'LAUNCH': {
-    items: ['MVP development', 'Go-to-market design', 'Landing page optimization', 'App Store deployment'],
+    items: [ 'Go-to-market design', 'Landing page optimization', 'App Store deployment'],
     image: '/design_showcase.png'
   },
   'EVOLVE': {
@@ -92,7 +92,7 @@ export default function HeaderMegaMenu() {
                   COMPANY ▼
                 </a>
               </li>
-              <li><a href="/#about" onClick={() => setMobileNavActive(false)}>INSIGHTS</a></li>
+              <li><Link to="/insights" onClick={() => setMobileNavActive(false)}>INSIGHTS</Link></li>
               <li><Link to="/contact" onClick={() => setMobileNavActive(false)}>CONTACTS</Link></li>
             </ul>
             <Link to="/contact" className="header-cta-btn-white" onClick={() => setMobileNavActive(false)}>
@@ -146,6 +146,30 @@ export default function HeaderMegaMenu() {
                     return (
                       <Link 
                         to="/services/website" 
+                        key={idx} 
+                        className="middle-list-item"
+                        onClick={() => setIsServicesOpen(false)}
+                      >
+                        {subService}
+                      </Link>
+                    );
+                  }
+                  if (subService === 'Mobile design') {
+                    return (
+                      <Link 
+                        to="/services/mobile" 
+                        key={idx} 
+                        className="middle-list-item"
+                        onClick={() => setIsServicesOpen(false)}
+                      >
+                        {subService}
+                      </Link>
+                    );
+                  }
+                  if (subService === 'Branding & identity') {
+                    return (
+                      <Link 
+                        to="/services/branding" 
                         key={idx} 
                         className="middle-list-item"
                         onClick={() => setIsServicesOpen(false)}

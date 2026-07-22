@@ -9,6 +9,8 @@ import Contact from './components/Contact';
 import Blog from './components/Blog';
 import BlogPost from './components/BlogPost';
 import WebsiteService from './components/services/website';
+import MobileService from './components/services/mobile';
+import BrandingService from './components/services/branding';
 import './App.css';
 
 
@@ -119,6 +121,9 @@ export default function App() {
         <Route path="/blog" element={<Blog />} />
         <Route path="/blog/:slug" element={<BlogPost />} />
         <Route path="/services/website" element={<WebsiteService />} />
+        <Route path="/services/mobile" element={<MobileService />} />
+        <Route path="/services/branding" element={<BrandingService />} />
+        <Route path="/insights" element={<Blog />} />
       </Routes>
 
       {/* Site Footer */}

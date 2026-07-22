@@ -7,7 +7,7 @@ const PAGE_LINKS = [
   { label: 'About us', href: '#about' },
   { label: 'Career', href: '#' },
   { label: 'Pricing', href: '#' },
-  { label: 'Blog', to: '/blog' },
+  { label: 'Insights', to: '/insights' },
   { label: 'FAQ', href: '#' }
 ];
 
@@ -261,6 +261,20 @@ export default function Footer() {
                 if (service === 'Website design') {
                   return (
                     <Link to="/services/website" key={index} className="accordion-service-link">
+                      {service}
+                    </Link>
+                  );
+                }
+                if (service === 'Mobile design') {
+                  return (
+                    <Link to="/services/mobile" key={index} className="accordion-service-link">
+                      {service}
+                    </Link>
+                  );
+                }
+                if (service === 'Branding & identity' || service === 'Branding') {
+                  return (
+                    <Link to="/services/branding" key={index} className="accordion-service-link">
                       {service}
                     </Link>
                   );

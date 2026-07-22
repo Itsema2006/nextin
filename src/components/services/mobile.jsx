@@ -1,9 +1,8 @@
 import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, useScroll, useSpring, useTransform } from 'framer-motion';
-import './website.css';
+import './mobile.css';
 
-// Typewriter Title Helper
 function TypingTitle({ text, className }) {
   const [displayedText, setDisplayedText] = useState('');
   const [isComplete, setIsComplete] = useState(false);
@@ -19,10 +18,10 @@ function TypingTitle({ text, className }) {
           setIsComplete(true);
           clearInterval(interval);
         }
-      }, 25); // Typing speed
+      }, 25);
 
       return () => clearInterval(interval);
-    }, 450); // Small initial delay
+    }, 450);
 
     return () => clearTimeout(delayTimeout);
   }, [text]);
@@ -30,15 +29,14 @@ function TypingTitle({ text, className }) {
   return (
     <h1 className={className}>
       {displayedText}
-      {!isComplete && <span className="w-typing-cursor">|</span>}
+      {!isComplete && <span className="m-typing-cursor">|</span>}
     </h1>
   );
 }
 
-export default function WebsiteService() {
+export default function MobileService() {
   useEffect(() => {
-    // Set document title and scroll to top on mount
-    document.title = 'Website Design & Development | NextIn';
+    document.title = 'Mobile App Design & Development | NextIn';
     window.scrollTo({ top: 0, behavior: 'instant' });
   }, []);
 
@@ -66,31 +64,30 @@ export default function WebsiteService() {
     {
       id: 'ux-audits',
       title: 'UX AUDITS',
-      content: 'We perform comprehensive user experience audits to identify friction in your user flows, analyze user drop-offs, optimize task completion paths, and ensure your site is easy and intuitive to navigate.'
+      content: 'We audit mobile interfaces specifically for thumb-zone accessibility, gesture navigation efficiency, simple onboarding flows, and logical mobile interactions to maximize user retention.'
     },
     {
       id: 'design-thinking',
       title: 'DESIGN THINKING',
-      content: 'Our creative process is grounded in design thinking. We start by empathizing with your audience, defining core pain points, brainstorming innovative layouts, and rapidly prototyping to test and refine solutions.'
+      content: 'Our mobile design thinking process addresses platform-specific contexts. We define user constraints on the go, brainstorm touch-first solutions, and prototype gestures to ensure native-feeling app flows.'
     },
     {
       id: 'wireframing',
       title: 'WIREFRAMING',
-      content: 'We build high-fidelity wireframes that outline the structure and hierarchy of your web interface. This visual blueprint maps out user paths and grid systems before moving to visual design.'
+      content: 'We create mobile screen maps and low-fidelity wireframes that outline screen-to-screen transitions, tab bar navigation structures, and interactive gesture triggers across iOS and Android.'
     },
     {
       id: 'aesthetics',
       title: 'AESTHETICS',
-      content: 'We craft premium UI aesthetics tailored to your brand. Using curated font pairings (e.g. Plus Jakarta Sans), sleek color palettes, subtle gradients, and custom glassmorphism effects, we build a layout that captivates visitors.'
+      content: 'We design premium mobile aesthetics utilizing platform-native design languages (Apple Human Interface Guidelines & Google Material Design). We specialize in custom dark modes, tactile button feel, and micro-interactions.'
     },
     {
       id: 'methodologies',
       title: 'METHODOLOGIES',
-      content: 'We utilize Agile and Waterfall methodologies depending on project scope. Agile allows for flexible, iterative feedback loops and bi-weekly sprint releases, while Waterfall works best for projects with strict, fixed requirements.'
+      content: 'Our mobile development process uses Agile sprints for continuous feature testing and deployment. We guide your app through sandbox testing, beta distribution (TestFlight/Google Play Console), and App Store submission cycles.'
     }
   ];
 
-  // Framer Motion Animation Configs
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -112,25 +109,25 @@ export default function WebsiteService() {
   };
 
   return (
-    <motion.div 
-      className="website-service-page"
+    <motion.div
+      className="mobile-service-page"
       initial="hidden"
       animate="visible"
       variants={containerVariants}
     >
       {/* 1. PIN CONTAINER: hero pinned + rounded cover sliding over it */}
-      <div ref={pinRef} className="w-hero-pin-container">
-        <motion.div 
+      <div ref={pinRef} className="m-hero-pin-container">
+        <motion.div
           style={{ y: heroY, scale: heroScale, opacity: heroOpacity }}
-          className="w-dark-wrap"
+          className="m-dark-wrap"
         >
-          <div className="w-section-container">
-            <div className="w-split-hero-container">
-              
+          <div className="m-section-container">
+            <div className="m-split-hero-container">
+
               {/* Left Column (Sticky Mockup Card with Custom 3D Geometric Wireframe) */}
-              <div className="w-left-sticky-col">
-                <div className="w-wireframe-container">
-                  <svg className="w-hero-wireframe-svg" viewBox="0 0 500 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <div className="m-left-sticky-col">
+                <div className="m-wireframe-container">
+                  <svg className="m-hero-wireframe-svg" viewBox="0 0 500 500" fill="none" xmlns="http://www.w3.org/2000/svg">
                     {/* Perspective axis lines */}
                     <line x1="250" y1="50" x2="250" y2="450" stroke="currentColor" strokeWidth="1" strokeOpacity="0.15" />
                     <line x1="50" y1="150" x2="450" y2="350" stroke="currentColor" strokeWidth="1" strokeOpacity="0.1" />
@@ -160,27 +157,23 @@ export default function WebsiteService() {
                 </div>
               </div>
 
-              {/* Right Column (Scrolling Text content) */}
-              <div className="w-right-scroll-col">
-                
-                {/* Hero Top Headers */}
-                <div className="w-hero-top">
-                  <span className="w-hero-tag">WEB APP DESIGN</span>
-                  
-                  {/* Typing title animation */}
-                  <TypingTitle 
-                    text="Web app design that drives growth & user engagement" 
-                    className="w-hero-title-main"
+              <div className="m-right-scroll-col">
+                <div className="m-hero-top">
+                  <span className="m-hero-tag">MOBILE APP DEVELOPMENT</span>
+
+                  <TypingTitle
+                    text="Mobile app development that drives growth & user engagement"
+                    className="m-hero-title-main"
                   />
-                  
-                  <div className="w-hero-actions-row">
-                    <Link to="/contact" className="w-btn-orange">
+
+                  <div className="m-hero-actions-row">
+                    <Link to="/contact" className="m-btn-orange">
                       Let's talk
                       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                         <path d="M5 12h14M12 5l7 7-7 7" />
                       </svg>
                     </Link>
-                    <a href="#tech" className="w-btn-charcoal">
+                    <a href="#tech" className="m-btn-charcoal">
                       View our cases
                       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                         <path d="M5 12h14M12 5l7 7-7 7" />
@@ -189,52 +182,50 @@ export default function WebsiteService() {
                   </div>
                 </div>
 
-                {/* Intro Text & Investors */}
-                <div className="w-hero-right-content">
-                  <p className="w-hero-intro-text">
-                    We create intuitive, user-centric designs that simplify workflows, enhance usability, and boost conversions — ensuring your web app is both functional and future-proof.
+                <div className="m-hero-right-content">
+                  <p className="m-hero-intro-text">
+                    We build native and cross-platform mobile apps with intuitive UX, smooth performance, and scalable architecture — ensuring your product delights users on iOS and Android.
                   </p>
-                  
-                  <div className="w-investors-tagline">
+
+                  <div className="m-investors-tagline">
                     DESIGNING PRODUCTS BACKED BY TOP-TIER INVESTORS
                   </div>
-                  
-                  <div className="w-investors-row">
-                    <div className="w-investor-item w-logo-techstars">
+
+                  <div className="m-investors-row">
+                    <div className="m-investor-item m-logo-techstars">
                       techstars<span>_</span>
                     </div>
-                    <div className="w-investor-item w-logo-yc">
-                      <div className="w-yc-box">Y</div> Combinator
+                    <div className="m-investor-item m-logo-yc">
+                      <div className="m-yc-box">Y</div> Combinator
                     </div>
-                    <div className="w-investor-item w-logo-ah">
+                    <div className="m-investor-item m-logo-ah">
                       <span>a16z</span> andreessen horowitz
                     </div>
-                    <div className="w-investor-item w-logo-andmore">
+                    <div className="m-investor-item m-logo-andmore">
                       AND MORE
                     </div>
                   </div>
                 </div>
 
-                {/* Numbers / Stats Grid */}
-                <div className="w-stats-right-content">
-                  <span className="w-stats-tagline">STUDIO IN NUMBERS</span>
-                  
-                  <div className="w-stats-grid">
-                    <div className="w-stat-cell">
-                      <div className="w-stat-number">500M+</div>
-                      <div className="w-stat-label">investments raised by our clients</div>
+                <div className="m-stats-right-content">
+                  <span className="m-stats-tagline">STUDIO IN NUMBERS</span>
+
+                  <div className="m-stats-grid">
+                    <div className="m-stat-cell">
+                      <div className="m-stat-number">500M+</div>
+                      <div className="m-stat-label">investments raised by our clients</div>
                     </div>
-                    <div className="w-stat-cell">
-                      <div className="w-stat-number">x2</div>
-                      <div className="w-stat-label">avg projects per client — most come back</div>
+                    <div className="m-stat-cell">
+                      <div className="m-stat-number">x2</div>
+                      <div className="m-stat-label">avg projects per client — most come back</div>
                     </div>
-                    <div className="w-stat-cell">
-                      <div className="w-stat-number">5.0</div>
-                      <div className="w-stat-label">on clutch — 40+ reviews</div>
+                    <div className="m-stat-cell">
+                      <div className="m-stat-number">5.0</div>
+                      <div className="m-stat-label">on clutch — 40+ reviews</div>
                     </div>
-                    <div className="w-stat-cell">
-                      <div className="w-stat-number">35%</div>
-                      <div className="w-stat-label">conversion lift — klickex case</div>
+                    <div className="m-stat-cell">
+                      <div className="m-stat-number">35%</div>
+                      <div className="m-stat-label">conversion lift — klickex case</div>
                     </div>
                   </div>
                 </div>
@@ -246,58 +237,58 @@ export default function WebsiteService() {
         </motion.div>
 
         {/* Rounded cover panel — slides up over the hero as you scroll */}
-        <motion.div className="w-hero-reveal-cover" style={{ y: coverY }} aria-hidden="true">
-          <div className="w-curved-divider" style={{ backgroundColor: 'transparent' }}>
+        <motion.div className="m-hero-reveal-cover" style={{ y: coverY }} aria-hidden="true">
+          <div className="m-curved-divider" style={{ backgroundColor: 'transparent' }}>
             <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
               <path fill="#ffffff" d="M0,120 L0,0 C0,40 40,100 100,100 L500,100 C580,100 620,20 670,20 C690,20 705,40 705,80 L705,120 L735,120 L735,80 C735,40 740,20 770,20 C820,20 860,100 940,100 L1340,100 C1400,100 1440,40 1440,0 L1440,120 Z" />
             </svg>
           </div>
-          <div className="w-cover-body" />
+          <div className="m-cover-body" />
         </motion.div>
       </div>
 
       {/* 2. LIGHT SECTIONS — begin exactly where the cover left off */}
-      <div className="w-light-sections-wrapper">
-        <div className="w-light-wrap">
-          <div className="w-section-container">
-            
+      <div className="m-light-sections-wrapper">
+        <div className="m-light-wrap">
+          <div className="m-section-container">
+
             {/* Challenges Block */}
-            <motion.section className="w-challenges-row" variants={itemVariants}>
-              <div className="w-challenges-left">
-                <span className="w-challenges-tag">CHALLENGES</span>
-                <h2 className="w-challenges-title">
-                  We design web apps that solve problems, not create them
+            <motion.section className="m-challenges-row" variants={itemVariants}>
+              <div className="m-challenges-left">
+                <span className="m-challenges-tag">CHALLENGES</span>
+                <h2 className="m-challenges-title">
+                  We build mobile apps that solve problems, not create them
                 </h2>
               </div>
-              
-              <div className="w-challenges-sub-col">
-                <p className="w-challenges-question">
-                  Is your web app frustrating users with poor navigation and low engagement?
+
+              <div className="m-challenges-sub-col">
+                <p className="m-challenges-question">
+                  Is your mobile app losing users to clunky navigation and poor performance?
                 </p>
-                <p className="w-challenges-desc">
-                  A confusing interface, slow load times, and lack of intuitive design can drive users away. We create seamless, user-centric experiences with clear navigation, smart UI patterns, and accessibility best practices to keep users engaged and encourage retention.
+                <p className="m-challenges-desc">
+                  Slow load times, confusing gestures, and inconsistent UI across platforms can drive users away. We create seamless, user-centric mobile experiences with intuitive navigation, platform-native patterns, and accessibility best practices to keep users engaged and coming back.
                 </p>
               </div>
             </motion.section>
 
             {/* Redesigned Process Section: Your Approach & Work Specifics Accordion Grid */}
-            <motion.section className="w-details-grid" variants={itemVariants}>
+            <motion.section className="m-details-grid" variants={itemVariants}>
               
               {/* Left Column: Title & Description */}
-              <div className="w-details-left">
-                <h2 className="w-details-title">
-                  <span className="w-title-bold">Your</span> <span className="w-title-light">Approach</span>
+              <div className="m-details-left">
+                <h2 className="m-details-title">
+                  <span className="m-title-bold">Your</span> <span className="m-title-light">Approach</span>
                   <br />
-                  <span className="w-title-bold">and</span> <span className="w-title-light">Work Specifics</span>
+                  <span className="m-title-bold">and</span> <span className="m-title-light">Work Specifics</span>
                 </h2>
                 
-                <p className="w-details-desc">
-                  Website design and development involves planning (requirement gathering, site mapping), design (wireframes, prototypes, visual elements), and development (front-end coding, back-end setup, responsive design). It requires tools like Figma for design, HTML/CSS/JavaScript for coding, and testing for functionality, performance, and accessibility. Post-launch, regular maintenance, content updates, and security enhancements ensure a seamless user experience.
+                <p className="m-details-desc">
+                  Mobile app design and development involves planning (requirement gathering, platform scoping), design (wireframing, mobile UI styling, responsive prototypes), and development (native Swift/Kotlin or cross-platform Flutter/React Native coding). It requires tools like Figma for mockups, and testing on physical devices for performance, responsiveness, and OS guidelines. Post-launch, regular updates, bug fixes, and SDK migrations ensure a secure, high-performing app.
                 </p>
 
-                <a href="/#tech" className="w-view-works-btn">
+                <a href="/#tech" className="m-view-works-btn">
                   <span>VIEW WORKS</span>
-                  <div className="w-circle-arrow-right">
+                  <div className="m-circle-arrow-right">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
                       <path d="M5 12h14M12 5l7 7-7 7" />
                     </svg>
@@ -306,20 +297,20 @@ export default function WebsiteService() {
               </div>
 
               {/* Right Column: Interactive Accordion List */}
-              <div className="w-details-right">
-                <div className="w-accordion-list">
+              <div className="m-details-right">
+                <div className="m-accordion-list">
                   {accordionData.map((item) => {
                     const isOpen = openAccordion === item.id;
                     return (
-                      <div key={item.id} className={`w-accordion-item ${isOpen ? 'is-open' : ''}`}>
+                      <div key={item.id} className={`m-accordion-item ${isOpen ? 'is-open' : ''}`}>
                         <button 
-                          className="w-accordion-trigger"
+                          className="m-accordion-trigger"
                           onClick={() => setOpenAccordion(isOpen ? null : item.id)}
                           aria-expanded={isOpen}
                         >
-                          <span className="w-accordion-title">{item.title}</span>
-                          <div className="w-accordion-icon-circle">
-                            <span className="w-accordion-icon-plus"></span>
+                          <span className="m-accordion-title">{item.title}</span>
+                          <div className="m-accordion-icon-circle">
+                            <span className="m-accordion-icon-plus"></span>
                           </div>
                         </button>
 
@@ -329,7 +320,7 @@ export default function WebsiteService() {
                           transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
                           style={{ overflow: 'hidden' }}
                         >
-                          <div className="w-accordion-body">
+                          <div className="m-accordion-body">
                             <p>{item.content}</p>
                           </div>
                         </motion.div>

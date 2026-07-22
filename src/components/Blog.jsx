@@ -15,6 +15,10 @@ export default function Blog() {
   const [activeCategory, setActiveCategory] = useState('All');
   const [currentPage, setCurrentPage] = useState(1);
 
+  useEffect(() => {
+    document.title = 'Insights | NextIn';
+  }, []);
+
   const filteredPosts = useMemo(() => {
     if (activeCategory === 'All') return blogPosts;
     return blogPosts.filter((post) => post.category === activeCategory);
@@ -43,7 +47,11 @@ export default function Blog() {
     <div className="blog-page">
       {/* Hero */}
       <section className="blog-hero">
-        <h1 className="blog-hero-title">Blog</h1>
+        <span className="blog-hero-tag">INSIGHTS</span>
+        <h1 className="blog-hero-title">Ideas, strategies, and perspectives on design &amp; technology</h1>
+        <p className="blog-hero-subtitle">
+          Explore articles on branding, product design, development, and digital strategy from the NextIn team.
+        </p>
 
         <div className="blog-filter-row" role="tablist" aria-label="Filter posts by category">
           {categories.map((category) => (

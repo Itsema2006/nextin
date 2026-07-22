@@ -1,0 +1,9 @@
+- [x] Redesign Website Service Page Layout
+  - [x] Modify `website.jsx` with the new white hero layout, wireframe SVG, scroll trigger, and custom accordions
+  - [x] Modify `website.css` with the typography, layout grids, circular icons, accordion styling, and dark text colors
+- [x] Redesign Mobile Service Page Layout
+  - [x] Modify `mobile.jsx` with the mobile-specific titles, copy, and accordions
+  - [x] Modify `mobile.css` with matching styling variables and responsive adjustments
+- [x] Verification
+  - [x] Run `npm run lint`
+  - [x] Run `npm run build`

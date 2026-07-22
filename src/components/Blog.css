@@ -24,7 +24,25 @@
 .blog-hero {
   max-width: 1240px;
   margin: 0 auto;
-  padding: 6rem 1.5rem 0;
+  padding: 8rem 1.5rem 0;
+}
+
+.blog-hero-tag {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--blog-text-muted);
+  display: block;
+  margin-bottom: 1.25rem;
+}
+
+.blog-hero-subtitle {
+  font-size: 1.15rem;
+  line-height: 1.6;
+  color: var(--blog-text-muted);
+  max-width: 640px;
+  margin: 0 0 2.5rem;
 }
 
 .blog-hero-title {
